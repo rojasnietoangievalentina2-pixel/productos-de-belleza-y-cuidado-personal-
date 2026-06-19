@@ -8,21 +8,72 @@
 </head>
 <body>
 
-    <header>
+<!-- ===== PANTALLA DE LOGIN ===== -->
+<div id="pantalla-auth">
+    <div class="auth-card">
+        <div class="auth-logo">💄</div>
         <h1>Beauty Glam</h1>
-        <p>Los mejores productos para tu cuidado personal</p>
+        <p class="auth-subtitulo">Los mejores productos para tu cuidado personal</p>
+
+        <div class="auth-tabs">
+            <button class="tab-btn activo" onclick="cambiarTab('login')">Iniciar sesión</button>
+            <button class="tab-btn" onclick="cambiarTab('registro')">Crear cuenta</button>
+        </div>
+
+        <div id="tab-login">
+            <div class="campo">
+                <label>Correo electrónico</label>
+                <input type="email" id="login-email" placeholder="tucorreo@ejemplo.com">
+            </div>
+            <div class="campo">
+                <label>Contraseña</label>
+                <input type="password" id="login-password" placeholder="••••••••">
+            </div>
+            <p id="login-error" class="auth-error"></p>
+            <button class="btn-auth" onclick="iniciarSesion()">Entrar →</button>
+        </div>
+
+        <div id="tab-registro" style="display:none">
+            <div class="campo">
+                <label>Nombre completo</label>
+                <input type="text" id="reg-nombre" placeholder="María González">
+            </div>
+            <div class="campo">
+                <label>Correo electrónico</label>
+                <input type="email" id="reg-email" placeholder="tucorreo@ejemplo.com">
+            </div>
+            <div class="campo">
+                <label>Contraseña</label>
+                <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres">
+            </div>
+            <p id="reg-error" class="auth-error"></p>
+            <button class="btn-auth" onclick="registrarUsuario()">Crear cuenta →</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== TIENDA (oculta hasta iniciar sesión) ===== -->
+<div id="pantalla-tienda" style="display:none">
+
+    <header>
+        <div class="header-top">
+            <div>
+                <h1>Beauty Glam</h1>
+                <p>Los mejores productos para tu cuidado personal</p>
+            </div>
+            <div class="header-usuario">
+                <span id="usuario-nombre">👤</span>
+                <button class="btn-logout" onclick="cerrarSesion()">Salir</button>
+            </div>
+        </div>
     </header>
 
-    <!-- 🔗 Navegación a secciones -->
     <nav class="menu">
         <a href="#shampoos">Shampoos</a>
         <a href="#maquillaje">Maquillaje</a>
         <a href="#skincare">Skincare</a>
     </nav>
 
-    <!-- ===================== -->
-    <!-- SECCIÓN SHAMPOOS -->
-    <!-- ===================== -->
     <section id="shampoos" class="categoria">
         <h2>Shampoos</h2>
         <div class="grid">
@@ -30,25 +81,38 @@
                 <img src="img/shampoo_hidratante.jpg" alt="Shampoo Hidratante" class="imagen">
                 <h3>Shampoo Hidratante</h3>
                 <p>$12.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Shampoo Hidratante', 12.99, this)">Agregar al carrito</button>
             </div>
-
             <div class="producto">
                 <img src="img/shampoo_anticaspa.png" alt="Shampoo Anticaspa" class="imagen">
                 <h3>Shampoo Anticaspa</h3>
                 <p>$10.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Shampoo Anticaspa', 10.99, this)">Agregar al carrito</button>
             </div>
-
             <div class="producto">
                 <img src="img/shampoo_reparador.png" alt="Shampoo Reparador" class="imagen">
                 <h3>Shampoo Reparador</h3>
                 <p>$14.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Shampoo Reparador', 14.99, this)">Agregar al carrito</button>
             </div>
         </div>
     </section>
 
-    <!-- ===================== -->
-    <!-- SECCIÓN MAQUILLAJE -->
-    <!-- ===================== -->
     <section id="maquillaje" class="categoria">
         <h2>Maquillaje</h2>
         <div class="grid">
@@ -56,31 +120,49 @@
                 <img src="img/base_liquida.png" alt="Base Líquida" class="imagen">
                 <h3>Base Líquida</h3>
                 <p>$18.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Base Líquida', 18.99, this)">Agregar al carrito</button>
             </div>
-
             <div class="producto">
                 <img src="img/labial_mate.png" alt="Labial Mate" class="imagen">
                 <h3>Labial Mate</h3>
                 <p>$8.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Labial Mate', 8.99, this)">Agregar al carrito</button>
             </div>
-
             <div class="producto">
                 <img src="img/paleta_sombras.png" alt="Paleta de Sombras" class="imagen">
                 <h3>Paleta de Sombras</h3>
                 <p>$22.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Paleta de Sombras', 22.99, this)">Agregar al carrito</button>
             </div>
-
             <div class="producto">
                 <img src="img/mascara_pestañas.png" alt="Máscara de Pestañas" class="imagen">
                 <h3>Máscara de Pestañas</h3>
                 <p>$11.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Máscara de Pestañas', 11.99, this)">Agregar al carrito</button>
             </div>
         </div>
     </section>
 
-    <!-- ===================== -->
-    <!-- SECCIÓN SKINCARE -->
-    <!-- ===================== -->
     <section id="skincare" class="categoria">
         <h2>Skincare</h2>
         <div class="grid">
@@ -88,27 +170,155 @@
                 <img src="img/limpiador_facial.png" alt="Limpiador Facial" class="imagen">
                 <h3>Limpiador Facial</h3>
                 <p>$15.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Limpiador Facial', 15.99, this)">Agregar al carrito</button>
             </div>
-
             <div class="producto">
                 <img src="img/crema_hidratante.png" alt="Crema Hidratante" class="imagen">
                 <h3>Crema Hidratante</h3>
                 <p>$17.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Crema Hidratante', 17.99, this)">Agregar al carrito</button>
             </div>
-
             <div class="producto">
                 <img src="img/protector_solar.png" alt="Protector Solar" class="imagen">
                 <h3>Protector Solar</h3>
                 <p>$19.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Protector Solar', 19.99, this)">Agregar al carrito</button>
             </div>
-
             <div class="producto">
                 <img src="img/serum.png" alt="Sérum Vitamina C" class="imagen">
                 <h3>Sérum Vitamina C</h3>
-                <p>$23.99</p>
+                <p>$24.99</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(this, -1)">-</button>
+                    <span class="valor">1</span>
+                    <button onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button class="btn-carrito" onclick="agregarAlCarrito('Sérum Vitamina C', 24.99, this)">Agregar al carrito</button>
             </div>
         </div>
     </section>
 
+    <!-- Carrito flotante -->
+    <div id="carrito-flotante" onclick="mostrarCarrito()">
+        🛒
+        <span id="contador-carrito" class="contador">0</span>
+    </div>
+
+    <!-- Panel lateral del carrito -->
+    <div id="carrito" class="carrito">
+        <div class="carrito-header">
+            <h2>🛍️ Tu carrito</h2>
+            <button class="btn-cerrar" onclick="cerrarCarrito()">✕</button>
+        </div>
+        <ul id="lista-carrito"></ul>
+        <div id="carrito-vacio" class="carrito-vacio">
+            <p>😊 Tu carrito está vacío</p>
+            <span>Agrega productos para comenzar</span>
+        </div>
+        <div class="carrito-footer">
+            <div class="linea-total">
+                <span>Subtotal</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+            <div class="linea-total envio">
+                <span>Envío</span>
+                <span>A calcular</span>
+            </div>
+            <div class="linea-total total-final">
+                <span>Total</span>
+                <span id="total">$0.00</span>
+            </div>
+            <button class="btn-vaciar" onclick="vaciarCarrito()">🗑️ Vaciar carrito</button>
+            <button class="btn-pagar" onclick="procederPago()">Proceder al pago →</button>
+        </div>
+    </div>
+
+    <!-- Modal de pago -->
+    <div id="overlay-pago" class="overlay-pago" onclick="cerrarModalPago()"></div>
+    <div id="modal-pago" class="modal-pago">
+        <div class="modal-header">
+            <h2>🚚 Datos de entrega</h2>
+            <button class="btn-cerrar" onclick="cerrarModalPago()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="resumen-pedido">
+                <h3>Resumen del pedido</h3>
+                <ul id="resumen-lista"></ul>
+                <div class="resumen-total">
+                    <span>Total</span>
+                    <span id="resumen-total-valor">$0.00</span>
+                </div>
+            </div>
+            <div class="tipo-entrega">
+                <h3>Tipo de entrega</h3>
+                <div class="opciones-entrega">
+                    <label class="opcion-entrega">
+                        <input type="radio" name="entrega" value="domicilio" checked onchange="toggleDireccion()">
+                        <span>🏠 Envío a domicilio</span>
+                    </label>
+                    <label class="opcion-entrega">
+                        <input type="radio" name="entrega" value="contraentrega" onchange="toggleDireccion()">
+                        <span>💵 Pago contraentrega</span>
+                    </label>
+                </div>
+            </div>
+            <div class="formulario-envio">
+                <h3>Tus datos</h3>
+                <div class="campo">
+                    <label>Nombre completo *</label>
+                    <input type="text" id="campo-nombre" placeholder="Ej: María González">
+                </div>
+                <div class="campo">
+                    <label>Teléfono *</label>
+                    <input type="tel" id="campo-telefono" placeholder="Ej: 3001234567">
+                </div>
+                <div id="seccion-direccion">
+                    <p id="nota-entrega" class="nota-entrega">🏠 Para enviar tu pedido necesitamos tu dirección.</p>
+                    <div class="campo">
+                        <label>Dirección *</label>
+                        <input type="text" id="campo-direccion" placeholder="Ej: Calle 10 # 5-23">
+                    </div>
+                    <div class="campo">
+                        <label>Ciudad *</label>
+                        <input type="text" id="campo-ciudad" placeholder="Ej: Girardot">
+                    </div>
+                    <div class="campo">
+                        <label>Barrio / Referencia</label>
+                        <input type="text" id="campo-barrio" placeholder="Ej: Barrio Centro, cerca al parque">
+                    </div>
+                </div>
+                <div class="campo">
+                    <label>Nota para el pedido (opcional)</label>
+                    <textarea id="campo-nota" placeholder="Instrucciones especiales..."></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-cancelar" onclick="cerrarModalPago()">Cancelar</button>
+            <button class="btn-confirmar" onclick="confirmarPedido()">Confirmar pedido ✓</button>
+        </div>
+    </div>
+
+</div><!-- fin pantalla-tienda -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
