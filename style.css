@@ -4,26 +4,26 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
-
+ 
 body{
     background-color: #fff5f8;
 }
-
+ 
 header{
     background: linear-gradient(135deg, #ff69b4, #ffb6c1);
     color: white;
     text-align: center;
     padding: 30px;
 }
-
+ 
 header h1{
     font-size: 3rem;
 }
-
+ 
 header p{
     margin-top: 10px;
 }
-
+ 
 /* 🔗 Menú de navegación */
 nav{
     background-color: white;
@@ -31,30 +31,30 @@ nav{
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
+ 
 nav a{
     text-decoration: none;
     color: #ff1493;
     margin: 0 20px;
     font-weight: bold;
 }
-
+ 
 nav a:hover{
     color: #d63384;
 }
-
+ 
 /* Secciones */
 section{
     padding: 40px;
 }
-
+ 
 section h2{
     text-align: center;
     margin-bottom: 25px;
     color: #d63384;
     font-size: 2rem;
 }
-
+ 
 /* ✅ Contenedor con Grid centrado */
 .grid {
     display: grid;
@@ -63,7 +63,7 @@ section h2{
     justify-content: center;   /* Centra las columnas */
     align-items: start;        /* Alinea los productos desde arriba */
 }
-
+ 
 /* Tarjeta de producto adaptable */
 .producto {
     background-color: white;
@@ -75,11 +75,11 @@ section h2{
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: transform 0.3s;
 }
-
+ 
 .producto:hover{
     transform: scale(1.05);
 }
-
+ 
 /* Imagen adaptable */
 .imagen {
     width: 100%;
@@ -88,18 +88,18 @@ section h2{
     object-fit: contain;       /* Muestra la imagen completa sin recorte */
     border-radius: 10px;
 }
-
+ 
 .producto h3{
     color: #333;
     margin: 10px 0;
 }
-
+ 
 .producto p{
     color: #ff1493;
     font-size: 1.2rem;
     font-weight: bold;
 }
-
+ 
 /* Footer */
 footer{
     background-color: #ff69b4;
@@ -108,14 +108,595 @@ footer{
     padding: 20px;
     margin-top: 30px;
 }
-
+ 
 .categoria {
     margin: 40px 0;
 }
-
+ 
 .categoria h2 {
     text-align: center;
     color: #d63384;
     margin-bottom: 20px;
     font-size: 2rem;
+}
+ 
+/* Botón de agregar */
+.btn-carrito {
+    background-color: #ff1493;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+ 
+.btn-carrito:hover {
+    background-color: #d63384;
+}
+ 
+/* Carrito flotante circular */
+#carrito-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff69b4;
+    color: white;
+    font-size: 2rem;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+ 
+/* Burbuja con el número de productos en el carrito */
+.contador {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #d63384;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: bold;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+ 
+/* ===== CARRITO PANEL ===== */
+.carrito {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 380px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    transition: right 0.35s ease;
+    z-index: 1000;
+}
+
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 15px;
+    border-bottom: 2px solid #ffe0ef;
+    background: linear-gradient(135deg, #ff69b4, #ffb6c1);
+    color: white;
+}
+
+.carrito-header h2 {
+    font-size: 1.3rem;
+    color: white;
+    margin: 0;
+}
+
+.btn-cerrar {
+    background: rgba(255,255,255,0.3);
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.btn-cerrar:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+/* Lista de productos */
+#lista-carrito {
+    list-style: none;
+    padding: 10px 15px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+#lista-carrito li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    margin: 8px 0;
+    background: #fff5f8;
+    border-radius: 12px;
+    border: 1px solid #ffe0ef;
+    font-size: 0.9rem;
+    gap: 8px;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 3px;
+}
+
+.item-nombre {
+    font-weight: bold;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.item-cantidad {
+    color: #ff69b4;
+    font-size: 0.8rem;
+}
+
+.item-precio {
+    font-weight: bold;
+    color: #d63384;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.btn-eliminar {
+    background: #ffe0ef;
+    color: #d63384;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-eliminar:hover {
+    background: #ff69b4;
+    color: white;
+}
+
+/* Carrito vacío */
+.carrito-vacio {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: #aaa;
+    text-align: center;
+    flex: 1;
+}
+
+.carrito-vacio p {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 8px;
+}
+
+.carrito-vacio span {
+    font-size: 0.85rem;
+}
+
+/* Footer del carrito */
+.carrito-footer {
+    padding: 15px 20px 20px;
+    border-top: 2px solid #ffe0ef;
+    background: #fff5f8;
+}
+
+.linea-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.linea-total.total-final {
+    font-weight: bold;
+    color: #d63384;
+    font-size: 1.1rem;
+    border-top: 1px solid #ffe0ef;
+    margin-top: 6px;
+    padding-top: 10px;
+}
+
+.btn-vaciar {
+    width: 100%;
+    padding: 10px;
+    margin-top: 12px;
+    background: transparent;
+    border: 1.5px solid #ffb6c1;
+    color: #d63384;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.btn-vaciar:hover {
+    background: #ffe0ef;
+}
+
+.btn-pagar {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #ff1493, #ff69b4);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-pagar:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* ===== MODAL DE PAGO ===== */
+.overlay-pago {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1100;
+}
+
+.modal-pago {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 480px;
+    max-height: 88vh;
+    background: white;
+    border-radius: 18px;
+    z-index: 1200;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px 15px;
+    background: linear-gradient(135deg, #ff69b4, #ffb6c1);
+    color: white;
+    flex-shrink: 0;
+}
+
+.modal-header h2 {
+    font-size: 1.2rem;
+    color: white;
+    margin: 0;
+}
+
+.modal-body {
+    overflow-y: auto;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Resumen del pedido */
+.resumen-pedido {
+    background: #fff5f8;
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid #ffe0ef;
+}
+
+.resumen-pedido h3,
+.tipo-entrega h3,
+.formulario-envio h3 {
+    font-size: 0.95rem;
+    color: #d63384;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#resumen-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+}
+
+#resumen-lista li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: #555;
+    padding: 4px 0;
+    border-bottom: 1px dashed #ffe0ef;
+}
+
+.resumen-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #d63384;
+    font-size: 1rem;
+    padding-top: 8px;
+}
+
+/* Opciones de entrega */
+.opciones-entrega {
+    display: flex;
+    gap: 12px;
+}
+
+.opcion-entrega {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border: 2px solid #ffe0ef;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.opcion-entrega:has(input:checked) {
+    border-color: #ff69b4;
+    background: #fff5f8;
+    color: #d63384;
+    font-weight: bold;
+}
+
+.opcion-entrega input {
+    accent-color: #ff1493;
+}
+
+/* Formulario */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+.campo label {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: bold;
+}
+
+.campo input,
+.campo textarea {
+    padding: 10px 13px;
+    border: 1.5px solid #ffe0ef;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #333;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+    border-color: #ff69b4;
+}
+
+.campo textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+/* Footer del modal */
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    padding: 15px 22px 20px;
+    border-top: 2px solid #ffe0ef;
+    background: #fff5f8;
+    flex-shrink: 0;
+}
+
+.btn-cancelar {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: 1.5px solid #ffb6c1;
+    color: #d63384;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+}
+
+.btn-cancelar:hover {
+    background: #ffe0ef;
+}
+
+.btn-confirmar {
+    flex: 2;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff1493, #ff69b4);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-confirmar:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* ===== PANTALLA AUTH ===== */
+#pantalla-auth {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff69b4, #ffb6c1, #fff5f8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 40px rgba(255, 105, 180, 0.2);
+    text-align: center;
+}
+
+.auth-logo {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.auth-card h1 {
+    font-size: 2rem;
+    color: #d63384;
+    margin-bottom: 5px;
+}
+
+.auth-subtitulo {
+    color: #aaa;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+}
+
+.auth-tabs {
+    display: flex;
+    background: #fff5f8;
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #aaa;
+    transition: all 0.2s;
+}
+
+.tab-btn.activo {
+    background: white;
+    color: #d63384;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.auth-error {
+    color: #e74c3c;
+    font-size: 0.82rem;
+    margin: -5px 0 10px;
+    min-height: 18px;
+    text-align: left;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #ff1493, #ff69b4);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-auth:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* Header con usuario */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#usuario-nombre {
+    font-size: 0.9rem;
+    color: white;
+    opacity: 0.9;
+}
+
+.btn-logout {
+    background: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn-logout:hover {
+    background: rgba(255,255,255,0.4);
 }
